@@ -1,0 +1,24 @@
+{% extends 'common/base.html' %}
+
+{% block title %}
+    auth
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="schemas_0">
+            <h3 class="Data_schemas">Data schemas</h3>
+            <button class="btn btn-success"><a class="button_new_schema" href="{% url "create_schemas" %}">New schema</a></button>
+        </div>
+        <div class="schemas_1">
+            {% for schema in schemas_list %}
+                <div class="schemas">
+                    <p>{{ schema.id }}</p>
+                    <p>{{ schema.title }}</p>
+                    <p>{{ schema.modified }}</p>
+                    <a href="{% url "update_schemas" id=schema.id %}">Edit schema</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

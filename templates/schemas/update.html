@@ -1,0 +1,126 @@
+{% extends 'common/base.html' %}
+
+{% block title %}
+    auth
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <h2>New schema</h2>
+
+        <form action="{% url "schemas_update_view" id=data.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Save</button>
+            <br><br>
+
+            <div class="forma_schema">
+                <label for="title" class="form-label">Name</label>
+                <input type="text" class="form-control" {% if data %} value="{{ data.title }}" {% endif %} name="title" id="title" aria-describedby="title">
+                <br>
+                <label for="column_separator" class="form-label">Column separator</label>
+                <input type="text" class="form-control" {% if data %} value="{{ data.column_separator }}" {% endif %} name="column_separator" id="column_separator" aria-describedby="column_separator">
+                <br>
+                <label for="string_character" class="form-label">String character</label>
+                <input type="text" class="form-control" {% if data %} value="{{ data.string_character }}" {% endif %} name="string_character" id="string_character" aria-describedby="string_character">
+                <br>
+                <span>{{ error }}</span>
+            </div>
+        </form>
+
+        <h2>Schema column</h2>
+
+        {% for col in columns %}
+
+            <div class="columns">
+                <div class="column_name_add">
+                    <label for="title" class="form-label">Column name</label>
+                    <div class="column_name_1">
+                        <p style="margin-left: 10px; margin-top: 6px">{{ col.name }}</p>
+                    </div>
+                </div>
+                <div class="column_type_add">
+                    <label for="type" class="form-label">Column type</label>
+                    <div class="column_name_2">
+                        <p style="margin-left: 10px; margin-top: 6px">{{ col.cut_type }}</p>
+                    </div>
+                </div>
+
+{#                <div class="column_type_plus_add">#}
+{#                    <label for="order" class="form-label">From</label>#}
+{#                    <div class="column_name_2_2">#}
+{#                        <p style="margin-left: 10px; margin-top: 6px"></p>#}
+{#                    </div>#}
+{#                </div>#}
+
+                <div class="column_delete_add">
+                    <div class="column_name_4">
+                        <a href="{% url "column_delete" pk=col.cut_schemas_id id=col.id %}" style="text-decoration: none; color: #c00606">Delete</a>
+                    </div>
+                </div>
+                <div class="column_order_add">
+                    <label for="order" class="form-label">Order</label>
+                    <div class="column_name_3">
+                        <p style="margin-left: 10px; margin-top: 6px">{{ col.order }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        {% endfor %}
+
+
+
+
+{#        <p>{% url "update_schemas_columns_add" id=col.cut_schemas_id %}</p>#}
+        <div class="add_column">
+            <form class="form_add_column" action="{% url "update_schemas_columns_add" id=data.id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="columns_add">
+                    <div class="column_name_add">
+                        <label for="name" class="form-label">Column name</label>
+                        <div>
+                            <input style="width: 100%" type="text" {% if column %} value="{{ column.name }}" {% endif %}
+                                   class="form-control" name="name" id="name"
+                                   aria-describedby="name">
+                        </div>
+                    </div>
+                    <div class="column_type_add">
+                        <label for="cut_type_id" class="form-label">Column type</label>
+                        <div>
+                            <input style="width: 100%" type="text" value="{{ categories.type }}" class="form-control"
+                                   name="cut_type_id"
+                                   id="cut_type_id"
+                                   aria-describedby="cut_type_id">
+                        </div>
+                    </div>
+
+                    {#                <div class="column_type_plus_add">#}
+                    {#                    <label for="order" class="form-label">From</label>#}
+                    {#                    <div class="column_name_2_2">#}
+                    {#                        <p style="margin-left: 10px; margin-top: 6px"></p>#}
+                    {#                    </div>#}
+                    {#                </div>#}
+
+                    <div class="column_delete_add">
+                        <div class="column_name_4">
+                            <a href="#"
+                               style="text-decoration: none; color: #c00606">Delete</a>
+                        </div>
+                    </div>
+                    <div class="column_order_add">
+                        <label for="order" class="form-label">Order</label>
+                        <div>
+                            <input style="width: 100%" type="text" {% if column %} value="{{ column.order }}" {% endif %}
+                                   class="form-control" name="order" id="order"
+                                   aria-describedby="order">
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <button style="btn-success">Submit</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+{% endblock %}

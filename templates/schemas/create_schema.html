@@ -1,0 +1,32 @@
+{% extends 'common/base.html' %}
+
+{% block title %}
+    auth
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <h2>New schema</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <br><br>
+
+            <div class="forma_schema">
+                <label for="exampleInputEmail1">Name</label>
+                {{ form.title }}
+                <br>
+                <label for="exampleInputPassword1">Column separator</label>
+                {{ form.column_separator }}
+                <br>
+                <label for="exampleInputPassword1">String character</label>
+                {{ form.string_character }}
+                <br>
+                <span>{{ error }}</span>
+            </div>
+        </form>
+
+    </div>
+{% endblock %}

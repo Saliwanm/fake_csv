@@ -1,0 +1,48 @@
+{% extends 'common/base.html' %}
+
+{% block title %}
+    auth
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Here is your schema</h1>
+        <div>
+            <p>{{ schema.id }}</p>
+            <p>{{ schema.title }}</p>
+            <p>{{ schema.modified }}</p>
+            <p>{{ column_separator.column_separator }}</p>
+            <p>{{ string_character.string_character }}</p>
+            {% if type_of_schemas_full_name %}
+                <p>{{ type_of_schemas_full_name.first_name }} {{ type_of_schemas_full_name.last_name }}</p>
+            {% endif %}
+            {% if type_of_schemas_job %}
+                <p>{{ type_of_schemas_job.job }}</p>
+            {% endif %}
+            {% if type_of_schemas_email %}
+                <p>{{ type_of_schemas_email.email }}</p>
+            {% endif %}
+            {% if type_of_schemas_domain_name %}
+                <p>{{ type_of_schemas_domain_name.domain_name }}</p>
+            {% endif %}
+            {% if type_of_schemas_phone_number %}
+                <p>{{ type_of_schemas_phone_number.phone_number }}</p>
+            {% endif %}
+            {% if type_of_schemas_company_name %}
+                <p>{{ type_of_schemas_company_name.company_name }}</p>
+            {% endif %}
+            {% if type_of_schemas_text %}
+                <p>{{ type_of_schemas_text.text }}</p>
+            {% endif %}
+            {% if type_of_schemas_integer %}
+                <p>from {{ type_of_schemas_integer.integer_start }} to {{ type_of_schemas_integer.integer_finish }}</p>
+            {% endif %}
+            {% if type_of_schemas_address %}
+                <p>{{ type_of_schemas_address.address }}</p>
+            {% endif %}
+            {% if type_of_schemas_date %}
+                <p>{{ type_of_schemas_date.date }}</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
